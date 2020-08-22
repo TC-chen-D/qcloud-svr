@@ -1,0 +1,4 @@
+time="2020-08-21T22:45:41+08:00" level=info msg=200 func=QCloudSvr/business.QcSvr file="E:/Goproject/src/QCloudSvr/business/qingCloud.go:60"
+time="2020-08-21T23:12:54+08:00" level=info msg=200 func=QCloudSvr/business.QcSvr file="E:/Goproject/src/QCloudSvr/business/qingCloud.go:64"
+time="2020-08-21T23:39:09+08:00" level=info msg=200 func="QCloudSvr/business.(*RequestInfo).QcApiSvr" file="E:/Goproject/src/QCloudSvr/business/qingCloud.go:68"
+time="2020-08-21T23:49:38+08:00" level=info msg=200 func="QCloudSvr/business.(*RequestInfo).QcApiSvr" file="E:/Goproject/src/QCloudSvr/business/qingCloud.go:157"
