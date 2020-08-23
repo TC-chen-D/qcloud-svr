@@ -6,13 +6,16 @@ logconf:
   rotation_count: 7
   log_level: debug
 
-# The instances request information
-instancesrequest:
+#The request api information
+apiurl:
   request_url: https://api.qingcloud.com/iaas/
   request_method: GET
+
+# The instances request information
+instancesrequest:
   access_key_id: QYACCESSKEYIDEXAMPLE
   action: DescribeInstances
-  expires: 2019-08-29T07:42:25Z
+  expires: 2020-08-29T07:42:25Z
   limit: 20
   signature_method: HmacSHA256
   signature_version: 1

@@ -8,10 +8,11 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
+	"gopkg.in/go-playground/validator.v9"
 	"io/ioutil"
 	"net/http"
+	"qcloud-svr/conf"
 	"qcloud-svr/models"
-	"qcloud-svr/utils"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -25,6 +26,29 @@ type RequestInfo struct {
 	RequestHeader     map[string]string
 }
 
+// Verification of input information
+func Validate(input *models.InstancesRequest) (*models.InstancesRequest, error) {
+	validate := validator.New()
+	if err := validate.Struct(input); err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			fmt.Println("err:", err)
+		}
+		return nil,err
+	}
+	return input, nil
+}
+
+// Get parameter validation from configuration information
+func NewInstancesRequest(c *conf.Conf) (*models.InstancesRequest,error) {
+	res,err := Validate(&c.InstancesRequest)
+	if err != nil {
+		return nil,err
+	}
+	return res,nil
+}
+
+
+// Build the request information
 func (r *RequestInfo) NewRequestInfo() error {
 	switch r.RequestMethod {
 	case "GET":
@@ -55,6 +79,7 @@ func (r *RequestInfo) NewRequestInfo() error {
 	return nil
 }
 
+// Parse GET method
 func (r *RequestInfo) ParseGet() error {
 	paramsParts := []string{}
 	parameters, err := json.Marshal(r.RequestParameters)
@@ -74,6 +99,7 @@ func (r *RequestInfo) ParseGet() error {
 	return nil
 }
 
+// parse post
 func (r *RequestInfo) ParsePost() error {
 	// parse post
 	return nil
@@ -95,14 +121,16 @@ func (r *RequestInfo) ParseAny() error {
 	return nil
 }
 
-func NewInstancesRequest(c *utils.Conf) *models.InstancesRequest {
-	return &c.InstancesRequest
-}
 
-func (r *RequestInfo) BuildRequestInfo(c *utils.Conf) error {
-	r.RequestURL = c.InstancesRequest.RequestURL
-	r.RequestMethod = c.InstancesRequest.RequestMethod
-	instancesRequest := NewInstancesRequest(c)
+// Encapsulation the http request information
+func (r *RequestInfo) BuildRequestInfo(c *conf.Conf) error {
+	r.RequestURL = c.ApiUrl.RequestURL
+	r.RequestMethod = c.ApiUrl.RequestMethod
+	instancesRequest,err := NewInstancesRequest(c)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
 	j, err := json.Marshal(instancesRequest)
 	if err != nil {
 		log.Error(err)
@@ -150,6 +178,7 @@ func (r *RequestInfo) QcApiSvr() *models.Rtn {
 	if response.StatusCode == http.StatusOK {
 		err = json.Unmarshal(body, &instanceResponse)
 		log.Info(http.StatusOK)
+		fmt.Println(instanceResponse)
 		return &models.Rtn{http.StatusOK, instanceResponse, "sucessful response!"}
 	} else {
 		log.Error(err)

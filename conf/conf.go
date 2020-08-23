@@ -1,7 +1,7 @@
 /*
  * Created by Chen on Fri.Aug.2020
  */
-package utils
+package conf
 
 import (
 	"io/ioutil"
@@ -13,6 +13,7 @@ import (
 type Conf struct {
 	models.InstancesRequest
 	models.LogConf
+	models.ApiUrl
 }
 
 func (c *Conf) GetConf() (*Conf, error) {
@@ -25,5 +26,6 @@ func (c *Conf) GetConf() (*Conf, error) {
 	}
 	return c, nil
 }
+
 
 
