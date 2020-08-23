@@ -5,7 +5,7 @@ package conf
 
 import (
 	"io/ioutil"
-	"qcloud-svr/models"
+	"github.com/tcchend/qcloud-svr/models"
 
 	"gopkg.in/yaml.v2"
 )

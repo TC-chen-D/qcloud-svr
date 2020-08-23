@@ -11,8 +11,8 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 	"io/ioutil"
 	"net/http"
-	"qcloud-svr/conf"
-	"qcloud-svr/models"
+	"github.com/tcchend/qcloud-svr/conf"
+	"github.com/tcchend/qcloud-svr/models"
 	"strings"
 
 	log "github.com/sirupsen/logrus"

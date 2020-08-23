@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"qcloud-svr/models"
+	"github.com/tcchend/qcloud-svr/models"
 	"reflect"
 	"testing"
 )

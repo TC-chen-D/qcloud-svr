@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6357030-6f94-48d2-9d6d-61a901226e41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/conf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/conf.go" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/instances.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/instances.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/distinct.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/distinct.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/distinct_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/distinct_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/conf.go" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logset.go" beforeDir="false" afterPath="$PROJECT_DIR$/conf/logset.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/validate.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/validate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/validate_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/validate_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

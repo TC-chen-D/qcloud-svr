@@ -3,7 +3,7 @@ package utils
 import (
 	"fmt"
 	"gopkg.in/go-playground/validator.v9"
-	"qcloud-svr/models"
+	"github.com/tcchend/qcloud-svr/models"
 )
 
 func Validate(input *models.InstancesRequest) (*models.InstancesRequest, error) {
