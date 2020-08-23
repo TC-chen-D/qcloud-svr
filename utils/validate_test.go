@@ -1,9 +1,10 @@
 package utils
 
 import (
-	"github.com/tcchend/qcloud-svr/models"
 	"reflect"
 	"testing"
+
+	"github.com/tcchend/qcloud-svr/models"
 )
 
 func TestValidate(t *testing.T) {

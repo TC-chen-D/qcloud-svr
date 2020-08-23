@@ -22,33 +22,33 @@ import (
 type RequestInfo struct {
 	RequestURL        string
 	RequestMethod     string
+	RequestAction     string
 	RequestParameters map[string]string
 	RequestHeader     map[string]string
 }
 
-// Verification of input information
+// Verification of input information.
 func Validate(input *models.InstancesRequest) (*models.InstancesRequest, error) {
 	validate := validator.New()
 	if err := validate.Struct(input); err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
 			fmt.Println("err:", err)
 		}
-		return nil,err
+		return nil, err
 	}
 	return input, nil
 }
 
-// Get parameter validation from configuration information
-func NewInstancesRequest(c *conf.Conf) (*models.InstancesRequest,error) {
-	res,err := Validate(&c.InstancesRequest)
+// Get parameter validation from configuration information.
+func NewInstancesRequest(c *conf.Conf) (*models.InstancesRequest, error) {
+	res, err := Validate(&c.InstancesRequest)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
-	return res,nil
+	return res, nil
 }
 
-
-// Build the request information
+// Build the request information.
 func (r *RequestInfo) NewRequestInfo() error {
 	switch r.RequestMethod {
 	case "GET":
@@ -79,7 +79,7 @@ func (r *RequestInfo) NewRequestInfo() error {
 	return nil
 }
 
-// Parse GET method
+// Parse GET method,process request parameters.
 func (r *RequestInfo) ParseGet() error {
 	paramsParts := []string{}
 	parameters, err := json.Marshal(r.RequestParameters)
@@ -121,12 +121,12 @@ func (r *RequestInfo) ParseAny() error {
 	return nil
 }
 
-
-// Encapsulation the http request information
+// Encapsulation the http request information.
 func (r *RequestInfo) BuildRequestInfo(c *conf.Conf) error {
 	r.RequestURL = c.ApiUrl.RequestURL
 	r.RequestMethod = c.ApiUrl.RequestMethod
-	instancesRequest,err := NewInstancesRequest(c)
+	r.RequestAction = c.InstancesRequest.Action
+	instancesRequest, err := NewInstancesRequest(c)
 	if err != nil {
 		log.Error(err)
 		return err
@@ -146,11 +146,12 @@ func (r *RequestInfo) BuildRequestInfo(c *conf.Conf) error {
 	return nil
 }
 
-func (r *RequestInfo) QcApiSvr() *models.Rtn {
+// Process the http request.
+func (r *RequestInfo) ProcessRequest() *models.InstancesResponse {
 	req, err := http.NewRequest(r.RequestMethod, r.RequestURL, nil)
 	if err != nil {
 		log.Error(err)
-		return &models.Rtn{http.StatusBadRequest,nil,"The bad request!"}
+		return &models.InstancesResponse{r.RequestAction, nil, 1100, 0}
 	}
 
 	tr := &http.Transport{
@@ -166,22 +167,21 @@ func (r *RequestInfo) QcApiSvr() *models.Rtn {
 	response, err := cli.Do(req)
 	if err != nil {
 		log.Error(err)
-		return &models.Rtn{}
+		return &models.InstancesResponse{r.RequestAction, nil, 1101, 0}
 	}
 	defer response.Body.Close()
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Error(err)
-		return &models.Rtn{}
+		return &models.InstancesResponse{r.RequestAction, nil, 1101, 0}
 	}
 	var instanceResponse models.InstancesResponse
 	if response.StatusCode == http.StatusOK {
-		err = json.Unmarshal(body, &instanceResponse)
-		log.Info(http.StatusOK)
-		fmt.Println(instanceResponse)
-		return &models.Rtn{http.StatusOK, instanceResponse, "sucessful response!"}
-	} else {
-		log.Error(err)
-		return &models.Rtn{}
+		if err = json.Unmarshal(body, &instanceResponse); err != nil {
+			log.Error(err)
+			return &models.InstancesResponse{r.RequestAction, nil, 1101, 0}
+		}
+		return &models.InstancesResponse{instanceResponse.Action, instanceResponse.InstanceSet, instanceResponse.RetCode, instanceResponse.TotalCount}
 	}
+	return &models.InstancesResponse{r.RequestAction, nil, 1100, 0}
 }

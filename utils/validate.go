@@ -16,3 +16,13 @@ func Validate(input *models.InstancesRequest) (*models.InstancesRequest, error) 
 	}
 	return input, nil
 }
+
+// Self-define validation function
+//func checkName(fl validator.FieldLevel) bool {
+//	count := utf8.RuneCountInString(fl.Field().String())
+//	fmt.Printf("length: %v \n", count)
+//	if  count > 5 {
+//		return false
+//	}
+//	return true
+//}

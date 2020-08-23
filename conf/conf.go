@@ -4,10 +4,9 @@
 package conf
 
 import (
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"github.com/tcchend/qcloud-svr/models"
-
-	"gopkg.in/yaml.v2"
 )
 
 type Conf struct {
@@ -17,7 +16,7 @@ type Conf struct {
 }
 
 func (c *Conf) GetConf() (*Conf, error) {
-	yamlFile, err := ioutil.ReadFile("./conf/conf.yaml")
+	yamlFile, err := ioutil.ReadFile("./conf.yaml")
 	if err != nil {
 		return nil, err
 	}

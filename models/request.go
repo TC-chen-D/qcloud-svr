@@ -3,7 +3,7 @@
  */
 package models
 
-// The Instances API request
+// The Instances API request.
 type InstancesRequest struct {
 	AccessKeyId      string `yaml:"access_key_id"json:"access_key_id"validate:"required"`
 	Action           string `yaml:"action"json:"action"validate:"required"`

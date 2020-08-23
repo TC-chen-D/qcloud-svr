@@ -3,7 +3,7 @@
  */
 package models
 
-// The detail information of vxnet
+// The detail information of vxnet.
 type VxnetInfo struct {
 	VxnetName string `json:"vxnet_name"`
 	VxnetType int    `json:"vxnet_type"`
@@ -12,7 +12,7 @@ type VxnetInfo struct {
 	PrivateIp string `json:"private_ip"`
 }
 
-// The detail information of image
+// The detail information of image.
 type ImageInfo struct {
 	ProcessorType string `json:"processor_type"`
 	Platform      string `json:"platform"`
@@ -23,7 +23,7 @@ type ImageInfo struct {
 	Provider      string `json:"provider"`
 }
 
-// The detail information of instance
+// The detail information of instance.
 type InstanceInfo struct {
 	VcpusCurrent     int         `json:"vcpus_current"`
 	InstanceId       string      `json:"instance_id"`
@@ -40,7 +40,7 @@ type InstanceInfo struct {
 	Description      string      `json:"description"`
 }
 
-// The Instances API response
+// The Instances API response.
 type InstancesResponse struct {
 	Action      string         `json:"action"`
 	InstanceSet []InstanceInfo `json:"instance_set"`
@@ -48,7 +48,7 @@ type InstancesResponse struct {
 	TotalCount  int            `json:"total_count"`
 }
 
-// The general response
+// The general response.
 type Rtn struct {
 	Code    int         `json:"code"`
 	Data    interface{} `json:"data"`

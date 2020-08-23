@@ -10,7 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// Init log
+// Init log configuration.
 func (c *Conf) InitLogs() {
 	log.SetFormatter(&log.TextFormatter{
 		TimestampFormat: "2006-01-02 15:04:05",
@@ -23,7 +23,7 @@ func (c *Conf) InitLogs() {
 	log.AddHook(hook)
 }
 
-// Set the log split and storage mode
+// Set the log split and storage mode.
 func (c *Conf) newLfsHook() log.Hook {
 	writer, err := rotatelogs.New(
 		fmt.Sprintf("%s/%s", c.LogConf.LogPath, c.LogConf.LogFile),
