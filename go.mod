@@ -1,4 +1,4 @@
-module qcloud-svr
+module github.com/tcchend/qcloud-svr
 
 go 1.13
 
